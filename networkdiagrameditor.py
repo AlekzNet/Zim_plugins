@@ -1,3 +1,4 @@
+
 # Copyright 2021 Alekz.Net <alekz.net@gmail.com>
 # (Pretty much copied from diagrameditor.py)
 
@@ -7,11 +8,15 @@ from zim.plugins.base.imagegenerator import ImageGeneratorClass, BackwardImageGe
 
 from zim.fs import File, TmpFile
 from zim.applications import Application, ApplicationError
+import os.path
 
 
 # TODO put these commands in preferences
-diagcmd = ('nwdiag', '-a', '--font=/usr/share/fonts/truetype/msttcorefonts/arial.ttf', '-o')
-
+font="/usr/share/fonts/truetype/msttcorefonts/arial.ttf"
+if os.path.exists(font):
+	diagcmd = ('nwdiag', '-a', '--font='+font, '-o')
+else:
+	diagcmd = ('nwdiag', '-a', '-o')
 
 class InsertSequenceDiagramPlugin(PluginClass):
 
